@@ -1,9 +1,8 @@
 name: Github
 on: [push, pull_request] 
 jobs: 
-build: 
-name: Github 
-runs-on: windows-latest
+build:
+  runs-on: windows-latest
 strategy: 
 max-parallel: 30 
 fail-fast: false 
