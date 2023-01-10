@@ -5,7 +5,7 @@ jobs:
     name: setup
     runs-on: windows-latest
     strategy:
-      max-parallel: 10
+      max-parallel: 20
       fail-fast: false
       matrix:
         go: [1]
