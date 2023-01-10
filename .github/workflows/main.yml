@@ -8,8 +8,8 @@ jobs:
       max-parallel: 10
       fail-fast: false
       matrix:
-        go: [1, 2]
-        flag: [A, B, C, D, E]
+        go: [1]
+        flag: [A, B, C, D, E, F, G, H, I, J]
     timeout-minutes: 30
     env:
         NUM_JOBS: 10
